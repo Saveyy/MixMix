@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MixMixMVC.Models.OrderDrinkViewModel>
+
+@{
+    ViewBag.Title = "ShoppingCart";
+    ViewBag.TotalPrice = 0;
+}
+
+<div class="container">
+    <div class="row shoppingcart">
+        <div class="col-xs-12">
+            <h2>Indkøbskurv:</h2>
+
+            <div class="row shoppingcart_header">
+                <div class="col-xs-4">
+                    <label>Drink</label>
+                </div>
+                <div class="col-xs-4">
+                    <label>Indhold</label>
+                </div>
+                <div class="col-xs-2">
+                    <label>Antal</label>
+                </div>
+                <div class="col-xs-2">
+                    <label>Pris</label>
+                </div>
+            </div>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    ViewBag.TotalPrice += item.Subtotal;
+
+                    <div class="row shoppingcart_item">
+                        <div class="col-xs-4">
+                            <span>@item.Names.First()</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <span>@item.Ingredients</span>
+                        </div>
+                        <div class="col-xs-2">
+                            <span>@item.Quantity</span>
+                        </div>
+                        <div class="col-xs-2">
+                            <span>@item.Subtotal</span>
+                        </div>
+                    </div>
+                }
+            }
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4>Total: @ViewBag.TotalPrice kr.</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    @Html.ActionLink("Til kassen", "CreateOrder", "Order", new { @class = "btn btn-success btn_order" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

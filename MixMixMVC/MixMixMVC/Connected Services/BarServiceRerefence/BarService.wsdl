@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BarService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="barServiceTcp_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="barServiceHttp_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp />
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <sp:EndorsingSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:SecureConversationToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+              <wsp:Policy>
+                <sp:BootstrapPolicy>
+                  <wsp:Policy>
+                    <sp:SignedParts>
+                      <sp:Body />
+                      <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+                      <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+                    </sp:SignedParts>
+                    <sp:EncryptedParts>
+                      <sp:Body />
+                    </sp:EncryptedParts>
+                    <sp:TransportBinding>
+                      <wsp:Policy>
+                        <sp:TransportToken>
+                          <wsp:Policy>
+                            <sp:HttpsToken RequireClientCertificate="false" />
+                          </wsp:Policy>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                          <wsp:Policy>
+                            <sp:Basic256 />
+                          </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                          <wsp:Policy>
+                            <sp:Strict />
+                          </wsp:Policy>
+                        </sp:Layout>
+                        <sp:IncludeTimestamp />
+                      </wsp:Policy>
+                    </sp:TransportBinding>
+                    <sp:SignedSupportingTokens>
+                      <wsp:Policy>
+                        <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+                          <wsp:Policy>
+                            <sp:WssUsernameToken10 />
+                          </wsp:Policy>
+                        </sp:UsernameToken>
+                      </wsp:Policy>
+                    </sp:SignedSupportingTokens>
+                    <sp:Wss11>
+                      <wsp:Policy />
+                    </sp:Wss11>
+                    <sp:Trust10>
+                      <wsp:Policy>
+                        <sp:MustSupportIssuedTokens />
+                        <sp:RequireClientEntropy />
+                        <sp:RequireServerEntropy />
+                      </wsp:Policy>
+                    </sp:Trust10>
+                  </wsp:Policy>
+                </sp:BootstrapPolicy>
+              </wsp:Policy>
+            </sp:SecureConversationToken>
+          </wsp:Policy>
+        </sp:EndorsingSupportingTokens>
+        <sp:Wss11 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy />
+        </sp:Wss11>
+        <sp:Trust10 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:MustSupportIssuedTokens />
+            <sp:RequireClientEntropy />
+            <sp:RequireServerEntropy />
+          </wsp:Policy>
+        </sp:Trust10>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="https://localhost:43001/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="https://localhost:43001/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://localhost:43001/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Entities" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBarService_Create_InputMessage">
+    <wsdl:part name="parameters" element="tns:Create" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_Create_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_Find_InputMessage">
+    <wsdl:part name="parameters" element="tns:Find" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_Find_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_Update_InputMessage">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_Update_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_GetBarsByManagerId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBarsByManagerId" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_GetBarsByManagerId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBarsByManagerIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_FindAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindAll" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_FindAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_Delete_InputMessage">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_Delete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_CreateStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateStock" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_CreateStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_CreateNonMeasurableStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNonMeasurableStock" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_CreateNonMeasurableStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateNonMeasurableStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_GetAllIngredients_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllIngredients" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_GetAllIngredients_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllIngredientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_GetAllMeasurements_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllMeasurements" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_GetAllMeasurements_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllMeasurementsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_GetAllStocks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllStocks" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_GetAllStocks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllStocksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_UpdateStock_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStock" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_UpdateStock_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStockResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_FindIngredient_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindIngredient" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_FindIngredient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindIngredientResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_FindMeasurement_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindMeasurement" />
+  </wsdl:message>
+  <wsdl:message name="IBarService_FindMeasurement_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindMeasurementResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IBarService">
+    <wsdl:operation name="Create">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBarService/Create" message="tns:IBarService_Create_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBarService/CreateResponse" message="tns:IBarService_Create_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Find">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBarService/Find" message="tns:IBarService_Find_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBarService/FindResponse" message="tns:IBarService_Find_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBarService/Update" message="tns:IBarService_Update_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBarService/UpdateResponse" message="tns:IBarService_Update_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBarsByManagerId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBarService/GetBarsByManagerId" message="tns:IBarService_GetBarsByManagerId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBarService/GetBarsByManagerIdResponse" message="tns:IBarService_GetBarsByManagerId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBarService/FindAll" message="tns:IBarService_FindAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBarService/FindAllResponse" message="tns:IBarService_FindAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBarService/Delete" message="tns:IBarService_Delete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBarService/DeleteResponse" message="tns:IBarService_Delete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBarService/CreateStock" message="tns:IBarService_CreateStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBarService/CreateStockResponse" message="tns:IBarService_CreateStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateNonMeasurableStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBarService/CreateNonMeasurableStock" message="tns:IBarService_CreateNonMeasurableStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBarService/CreateNonMeasurableStockResponse" message="tns:IBarService_CreateNonMeasurableStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIngredients">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBarService/GetAllIngredients" message="tns:IBarService_GetAllIngredients_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBarService/GetAllIngredientsResponse" message="tns:IBarService_GetAllIngredients_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllMeasurements">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBarService/GetAllMeasurements" message="tns:IBarService_GetAllMeasurements_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBarService/GetAllMeasurementsResponse" message="tns:IBarService_GetAllMeasurements_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllStocks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBarService/GetAllStocks" message="tns:IBarService_GetAllStocks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBarService/GetAllStocksResponse" message="tns:IBarService_GetAllStocks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStock">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBarService/UpdateStock" message="tns:IBarService_UpdateStock_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBarService/UpdateStockResponse" message="tns:IBarService_UpdateStock_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindIngredient">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBarService/FindIngredient" message="tns:IBarService_FindIngredient_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBarService/FindIngredientResponse" message="tns:IBarService_FindIngredient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindMeasurement">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBarService/FindMeasurement" message="tns:IBarService_FindMeasurement_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBarService/FindMeasurementResponse" message="tns:IBarService_FindMeasurement_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="barServiceTcp" type="tns:IBarService">
+    <wsp:PolicyReference URI="#barServiceTcp_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Find">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/Find" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBarsByManagerId">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/GetBarsByManagerId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAll">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/FindAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateStock">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/CreateStock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNonMeasurableStock">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/CreateNonMeasurableStock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIngredients">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/GetAllIngredients" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllMeasurements">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/GetAllMeasurements" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllStocks">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/GetAllStocks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStock">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/UpdateStock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindIngredient">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/FindIngredient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindMeasurement">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/FindMeasurement" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="barServiceHttp" type="tns:IBarService">
+    <wsp:PolicyReference URI="#barServiceHttp_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Create">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/Create" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Find">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/Find" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/Update" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBarsByManagerId">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/GetBarsByManagerId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAll">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/FindAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/Delete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateStock">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/CreateStock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateNonMeasurableStock">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/CreateNonMeasurableStock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllIngredients">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/GetAllIngredients" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllMeasurements">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/GetAllMeasurements" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllStocks">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/GetAllStocks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStock">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/UpdateStock" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindIngredient">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/FindIngredient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindMeasurement">
+      <soap12:operation soapAction="http://tempuri.org/IBarService/FindMeasurement" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BarService">
+    <wsdl:port name="barServiceTcp" binding="tns:barServiceTcp">
+      <soap12:address location="net.tcp://localhost:42001/barServiceTCP" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:42001/barServiceTCP</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>DESKTOP-J0BISU1\madse</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="barServiceHttp" binding="tns:barServiceHttp">
+      <soap12:address location="https://localhost:43001/barServiceHttp" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>https://localhost:43001/barServiceHttp</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

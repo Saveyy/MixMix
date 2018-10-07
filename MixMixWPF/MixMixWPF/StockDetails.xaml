@@ -1,0 +1,296 @@
+﻿<Window x:Class="MixMixWPF.StockDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MixMixWPF"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Title="StockDetails" Height="768" Width="1366">
+    <!--Title="StockDetails" Height="1080" Width="1920">-->
+    <StackPanel x:Name="stackedpanel_stockdetails" Margin="10">
+        <!-- Instock Header-->
+        <StackPanel x:Name="stackedpanel_instock_header" Background="DarkCyan">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="På lager" Grid.Column="0" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel>
+            <!-- SearchField In Stock-->
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Name="searchStocks" Grid.Column="0" Padding="10" FontSize="12" Margin="0 0 5 0"></TextBox>
+                    <Button Name="searchStocks_Button" Grid.Column="1" FontSize="12" Content="Søg" Padding="5" Click="searchStocks_Button_Click" Margin="0 0 5 0" ></Button>
+                    <Button Name="restoreStocksList_Button" Grid.Column="2" FontSize="12" Content="Tilbage" Padding="5" Click="restoreStocksList_Button_Click" ></Button>
+                </Grid>
+            </Grid>
+            <!--Instock Categories-->
+            <Grid Margin="5">
+                <TextBlock Text="Alkohol" FontWeight="Bold" Padding="2" Grid.Column="0" HorizontalAlignment="Center" Margin="0 0 5 0" />
+                <TextBlock Text="Vand" FontWeight="Bold" Padding="2" Grid.Column="1" HorizontalAlignment="Center" Margin="5 0 5 0" />
+                <TextBlock Text="Diverse" FontWeight="Bold" Padding="2" Grid.Column="2" HorizontalAlignment="Center" Margin="5 0 0 0" />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <TextBlock Text="Varer:" FontWeight="Bold" Padding="2" Grid.Column="0" HorizontalAlignment="Left" />
+                    <TextBlock Text="Målestok:" FontWeight="Bold" Padding="2" Grid.Column="1" HorizontalAlignment="Left" />
+                    <TextBlock Text="Mængde:" FontWeight="Bold" Padding="2" Grid.Column="2" HorizontalAlignment="Left" />
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <TextBlock Text="Varer:" FontWeight="Bold" Padding="2" Grid.Column="0" HorizontalAlignment="Left" />
+                    <TextBlock Text="Målestok:" FontWeight="Bold" Padding="2" Grid.Column="1" HorizontalAlignment="Left"  />
+                    <TextBlock Text="Mængde:" FontWeight="Bold" Padding="2" Grid.Column="2" HorizontalAlignment="Left"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <TextBlock Text="Varer:" FontWeight="Bold" Padding="2" Grid.Column="0" HorizontalAlignment="Left" />
+                    <TextBlock Text="Mængde:" FontWeight="Bold" Padding="2" Grid.Column="1" HorizontalAlignment="Left" />
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </Grid>
+        </StackPanel>
+
+        <!-- STOCK-->
+        <Grid MaxHeight="150"  Name="InStockGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- ALCOHOL -->
+            <StackPanel Grid.Column="0">
+                <ScrollViewer Grid.Column="3" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Height="320" Margin="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel x:Name="alc_ingredient" Grid.Column="0" Margin="0 0 5 0"/>
+                        <StackPanel x:Name="alc_measurement" Grid.Column="1" Margin="5 0 5 0" />
+                        <StackPanel x:Name="alc_quantity" Grid.Column="2" Margin="5 0 0 0"/>
+                    </Grid>
+                </ScrollViewer>
+            </StackPanel>
+            <!-- SOFT DRINKS -->
+            <StackPanel Grid.Column="1">
+                <ScrollViewer Grid.Column="3" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Height="320" Margin="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel x:Name="soda_ingredient" Grid.Column="0" Margin="0 0 5 0"/>
+                        <StackPanel x:Name="soda_measurement" Grid.Column="1" Margin="5 0 5 0" />
+                        <StackPanel x:Name="soda_quantity" Grid.Column="2" Margin="5 0 0 0"/>
+                    </Grid>
+                </ScrollViewer>
+            </StackPanel>
+            <!-- MISCELLANEOUS -->
+            <StackPanel Grid.Column="2">
+                <ScrollViewer Grid.Column="2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Height="320" Margin="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel x:Name="misc_ingredient" Grid.Column="0" Margin="0 0 5 0"/>
+                        <StackPanel x:Name="misc_quantity" Grid.Column="1" Margin="5 0 0 0"/>
+                    </Grid>
+                </ScrollViewer>
+            </StackPanel>
+        </Grid>
+
+
+        <!--Add To Stock Header v-->
+        <StackPanel x:Name="stackedpanel_addtostock_header"  Background="DarkCyan">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Tilføj til lager" FontWeight="Bold" FontSize="12" HorizontalAlignment="Center"/>
+            </Grid>
+        </StackPanel>
+
+        <StackPanel>
+            <!-- SearchField add to Stock-->
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Name="searchIngredients" Grid.Column="0" Padding="10" FontSize="12" Margin="0 0 5 0"></TextBox>
+                    <Button Name="searchIngredients_Button" Grid.Column="1" FontSize="12" Content="Søg" Padding="5" Click="searchIngredients_Button_Click" Margin="0 0 5 0"></Button>
+                    <Button Name="restoreIngredientsList_Button" Grid.Column="2" FontSize="12" Content="Tilbage" Padding="5" Click="restoreIngredientsList_Button_Click" ></Button>
+                </Grid>
+            </Grid>
+            <Grid Margin="5">
+                <TextBlock Text="Alkohol" FontWeight="Bold" Padding="2" Grid.Column="0" HorizontalAlignment="Center" Margin="0 0 5 0" />
+                <TextBlock Text="Vand" FontWeight="Bold" Padding="2" Grid.Column="1" HorizontalAlignment="Center" Margin="5 0 5 0" />
+                <TextBlock Text="Diverse" FontWeight="Bold" Padding="2" Grid.Column="2" HorizontalAlignment="Center" Margin="5 0 0 0" />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <TextBlock Text="Varer:" FontWeight="Bold" Padding="2" Grid.Column="0" HorizontalAlignment="Left" />
+                    <TextBlock Text="Målestok:" FontWeight="Bold" Padding="2" Grid.Column="1" HorizontalAlignment="Left" />
+                    <TextBlock Text="Mængde:" FontWeight="Bold" Padding="2" Grid.Column="2" HorizontalAlignment="Left" />
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <TextBlock Text="Varer:" FontWeight="Bold" Padding="2" Grid.Column="0" HorizontalAlignment="Left" />
+                    <TextBlock Text="Målestok:" FontWeight="Bold" Padding="2" Grid.Column="1" HorizontalAlignment="Left"  />
+                    <TextBlock Text="Mængde:" FontWeight="Bold" Padding="2" Grid.Column="2" HorizontalAlignment="Left"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <TextBlock Text="Varer:" FontWeight="Bold" Padding="2" Grid.Column="0" HorizontalAlignment="Left" />
+                    <TextBlock Text="Mængde:" FontWeight="Bold" Padding="2" Grid.Column="1" HorizontalAlignment="Left" />
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </Grid>
+        </StackPanel>
+
+        <!-- ADDSTOCK-->
+        <Grid Name="AddStockGrid" MaxHeight="150">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- ADD ALCOHOL -->
+            <StackPanel Grid.Column="0">
+                <ScrollViewer Grid.Column="4" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Height="320" Margin="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel x:Name="alc_add_ingredient" Grid.Column="0" Margin="0 0 5 0"/>
+                        <StackPanel x:Name="alc_add_measurement" Grid.Column="1" Margin="5 0 5 0" />
+                        <StackPanel x:Name="alc_add_quantity" Grid.Column="2" Margin="5 0 0 0"/>
+                        <StackPanel x:Name="alc_add_button" Grid.Column="3" Margin="5 0 0 0"/>
+                    </Grid>
+                </ScrollViewer>
+            </StackPanel>
+            <!-- ADD SOFT DRINKS -->
+            <StackPanel Grid.Column="1">
+                <ScrollViewer Grid.Column="4" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Height="320" Margin="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel x:Name="soda_add_ingredient" Grid.Column="0" Margin="0 0 5 0"/>
+                        <StackPanel x:Name="soda_add_measurement" Grid.Column="1" Margin="5 0 5 0" />
+                        <StackPanel x:Name="soda_add_quantity" Grid.Column="2" Margin="5 0 0 0"/>
+                        <StackPanel x:Name="soda_add_button" Grid.Column="3" Margin="5 0 0 0"/>
+                    </Grid>
+                </ScrollViewer>
+            </StackPanel>
+            <!-- ADD MISCELLANEOUS -->
+            <StackPanel Grid.Column="2">
+                <ScrollViewer Grid.Column="3" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Height="188" Margin="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel x:Name="misc_add_ingredient" Grid.Column="0" Margin="0 0 5 0"/>
+                        <StackPanel x:Name="misc_add_quantity" Grid.Column="1" Margin="5 0 0 0"/>
+                        <StackPanel x:Name="misc_add_button" Grid.Column="2" Margin="5 0 0 0"/>
+                    </Grid>
+                </ScrollViewer>
+            </StackPanel>
+        </Grid>
+        <DockPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="button_cancel" DockPanel.Dock="Top" Grid.Column="1" Content="Anuller" Margin="5" Click="button_cancel_Click"/>
+                <Button x:Name="button_updatestock" DockPanel.Dock="Top" Grid.Column="2" Content="Opdater lager" Margin="5" Click="button_updatestock_Click" />
+            </Grid>
+        </DockPanel>
+    </StackPanel>
+</Window>

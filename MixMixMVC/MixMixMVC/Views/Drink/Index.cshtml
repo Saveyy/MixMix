@@ -1,0 +1,63 @@
+﻿@model Dictionary<int, MixMixMVC.DrinkServiceReference.DrinkViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div class="container drink_list_container">
+    <div class="row">
+        <div class="drinklist_banner">
+            <h2>Velkommen til @ViewBag.BarName</h2>
+
+            <h3>@ViewBag.Message</h3>
+
+            <p>
+                @Html.ActionLink("Opret ny drink", "DrinkName", new { barId = (int)ViewBag.barId }, new { @class = "btn btn-primary" })
+            </p>
+        </div>
+    </div>
+    @if (Model.Count == 0)
+    {
+        <P>HER KAN MAN LAVE NOGET FEJL HÅNDTERING PÅ AT DRINKSKORTET ER TOMT</P>
+    }
+    else
+    {
+        <div class="row drink_list_header">
+            <div class="col-xs-3">
+                <p>Drinks:</p>
+            </div>
+            <div class="col-xs-5">
+                <p>Indhold:</p>
+            </div>
+            <div class="col-xs-2">
+                <p>Pris:</p>
+            </div>
+        </div>
+
+        foreach (var item in Model.Values)
+        {
+            <div class="row drink_list_item">
+                <form action="@Url.Action("AddToCart", "Order")" method="post">
+                    <div class="col-xs-3">
+                        @Html.DropDownList("name", new SelectList(item.Names))
+                    </div>
+                    <div class="col-xs-5">
+                        <p>@Html.DisplayFor(modelItem => item.Ingredients)</p>
+                    </div>
+                    <div class="col-xs-2">
+                        <p>@Html.DisplayFor(modelItem => item.Price)</p>
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn btn-success" style="margin-top:2px;" type="submit">Tilføj til kurv</button>
+                    </div>
+
+                    @Html.Hidden("ingredients", item.Ingredients)
+                    @Html.Hidden("drinkId", item.Id)
+                    @Html.Hidden("barId", (int)ViewBag.barId)
+                </form>
+            </div>
+        }
+    }
+</div>

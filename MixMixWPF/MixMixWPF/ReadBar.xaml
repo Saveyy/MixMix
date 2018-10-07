@@ -1,0 +1,49 @@
+﻿<Window x:Class="MixMixWPF.ReadBar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MixMixWPF"
+        mc:Ignorable="d"
+        Title="ReadBar" Height="600" Width="800" Deactivated="Window_Deactivated">
+    <StackPanel Margin="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--Stam data -->
+            <StackPanel Margin="0 0 5 0"  Grid.Column="0">
+                <TextBlock Text="Stam data" FontWeight="Bold" Margin="0 0 0 5" />
+                <TextBox x:Name="textbox_name" Text="Navn" Padding="5" Margin="0 0 0 5"/>
+                <TextBox x:Name="textbox_username" Text="Brugernavn" Padding="5" Margin="0 0 0 5"/>
+                <TextBox x:Name="textbox_email" Text="Email" Padding="5" Margin="0 0 0 5"/>
+                <TextBox x:Name="textbox_phone" Text="Tlf. nr." Padding="5" Margin="0 0 0 5"/>
+            </StackPanel>
+
+            <!--Adresse -->
+            <StackPanel Margin="5 0 0 0" Grid.Column="1">
+                <TextBlock Text="Adresse" FontWeight="Bold" Margin="0 0 0 5"/>
+                <ComboBox  x:Name="combobox_countries" Padding="6" Margin="0 0 0 5" />
+                <ComboBox  x:Name="combobox_zipcodes" Padding="6" Margin="0 0 0 5" />
+                <Border BorderThickness="1" BorderBrush="#aaa" Margin="0 0 0 5">
+                    <TextBlock Text="By" x:Name="textblock_city" Padding="5" />
+                </Border>
+                <TextBox x:Name="textbox_address" Text="Adresse" Padding="5" Margin="0 0 0 5"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Buttons -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="button_cancel" Content="Anuller" HorizontalAlignment="Left" Grid.Column="0" Padding="20 5" Click="button_cancel_click"/>
+            <Button x:Name="button_update" Content="Opdater" HorizontalAlignment="Right" Grid.Column="1" Padding="20 5" Click="button_update_click"/>
+            <Button x:Name="button_delete" Content="Slet" HorizontalAlignment="Left" Grid.Column="1" Padding="20 5" Margin="5 0 0 0" Click="button_delete_click"/>
+        </Grid>
+    </StackPanel>
+</Window>

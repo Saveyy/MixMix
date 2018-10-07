@@ -1,0 +1,30 @@
+﻿@model MixMixMVC.Models.DrinkNameViewModel
+
+@{
+    ViewBag.Title = "DrinkName";
+}
+
+<div class="container">
+    <div class="center_container">
+        <h4>Opret drink - Side 1 af 3</h4>
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>Drinkens navn</p>
+                    </div>
+                    <div class="col-xs-12">
+                        @Html.EditorFor(model => model.DrinkName, new { htmlAttributes = new { @class = "" } })
+                        @Html.ValidationMessageFor(model => model.DrinkName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12">
+                        <input type="submit" value="Opret drinknavn" class="btn btn-success" />
+                    </div>
+                </div>
+        }
+    </div>
+</div>

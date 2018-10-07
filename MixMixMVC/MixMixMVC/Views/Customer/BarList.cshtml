@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MixMixMVC.BarServiceRerefence.Bar>
+
+@{
+    ViewBag.Title = "BarList";
+}
+<div class="container">
+    <div class="barlist_header">
+        <h2>Søg efter bare</h2>
+        @using (Html.BeginForm())
+        {
+            <p>
+                Post nummer: @Html.TextBox("zipcode", null, new { @class = "searchField" })
+                <input class="btn btn-success" type="submit" value="Find" />
+            </p>
+        }
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-6 col-md-4" style="margin-bottom:20px">
+                <div class="thumbnail">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2207.042860380626!2d9.409382316081953!3d56.41532394816606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464be5084d69841b%3A0x2b849acaa7845514!2sHvidtj%C3%B8rnen+7%2C+8800+Viborg!5e0!3m2!1sda!2sdk!4v1527506355657" class="googleMap" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <div class="caption">
+                        <h3>@item.Name</h3>
+                        <ul>
+                            <li><span class="glyphicon glyphicon-home"></span> @item.Address.AddressName</li>
+                            <li><span class="glyphicon glyphicon-envelope"></span> @item.Email</li>
+                            <li><span class="glyphicon glyphicon-phone"></span> @item.PhoneNumber</li>
+                        </ul>
+                        @Html.ActionLink("Check in", "Index", "Drink", new { barId = item.ID, message = "" }, new { @class = "btn btn-primary" })
+
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

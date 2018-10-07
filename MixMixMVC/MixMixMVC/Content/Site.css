@@ -1,0 +1,177 @@
+﻿body {
+    padding-top: 50px;
+    background:url("../Images/sativa.png");
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+footer {
+    background: black;
+    overflow: auto;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width:100%;
+}
+footer p {
+    color:white;
+}
+
+/*FRONTPAGE*/
+.frontpage-container{
+    background:url("../Images/frontpage-drinks.jpg");
+    background-size:cover;
+    height:94.7vh;
+    width:100%;
+    text-align:center;
+}
+.frontpage-container h1 {
+    margin:0px;
+    padding:0px;
+    color:white;
+    position:relative;
+    top:30%;
+    font-size:5em;
+}
+
+/*BARLIST*/
+.thumbnail{
+    overflow:auto;
+}
+.googleMap {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+.caption ul {
+    list-style:none;
+    margin-bottom:5px;
+    padding:0px;
+}
+.searchField {
+    padding:6px;
+    margin:0px;
+    border-radius:4px;
+    border:1px solid #999;
+}
+.barlist_header{
+    overflow:hidden;
+    text-align:center;
+    background:#333;
+    color:#fff;
+    padding-bottom:20px;
+}
+
+/*DRINKLIST*/
+.drink_list_item {
+    border-bottom: 1px dotted #333;
+    margin-bottom: 10px;
+    padding: 10px 0px 10px 0px;
+    border-radius: 2px;
+}
+.drink_list_item select {
+    padding:10px;
+}
+.drink_list_header{
+    background:#333;
+    padding:10px 0px 10px 0px;
+    color:white;
+}
+.drinklist_banner {
+    overflow: hidden;
+    text-align: center;
+    background: #333;
+    color: #fff;
+    padding-bottom: 20px;
+    margin-bottom:20px;
+}
+.drinklist_banner a {
+    width:20%;
+}
+/*SHOPPINGCART*/
+.shoppingcart {
+    background: #fff;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+.shoppingcart_header{
+    background:#333;
+    padding:10px;
+    color:#fff;
+}
+.shoppingcart_item{
+    padding:10px;
+    border-bottom:1px dotted #333;
+}
+.shoppingcart h4 {
+    float:right;
+}
+.btn_order{
+    margin:10px 0px 10px 0px;
+    width:120px;
+    float:right;
+}
+/*CREATEUSER*/
+.create_user_container{
+    background:#fff;
+    border-radius:2px;
+    padding:40px;
+    float:left;
+    display:block;
+    position:relative;
+    left:35%;
+    margin-top:100px;
+}
+.create_user_container h3 {
+    padding:0px;
+    margin:0px 0px 20px 0px;
+    font-weight:bold;
+    font-size:2em;
+}
+.create_user_form label {
+    padding:0px;
+    margin:0px;
+    font-size:1.3em;
+}
+.create_user_form input{
+    font-size:1.3em;
+    width:320px;
+    margin-bottom:10px;
+}
+
+/*CREATE DRINK*/
+.center_container {
+    background: #fff;
+    border-radius: 2px;
+    padding: 40px;
+    float: left;
+    display: block;
+    position: relative;
+    left: 35%;
+    margin-top: 100px;
+    text-align:center;
+}
+.center_container input,select,button,a {
+    padding:5px;
+    width:100%;
+    margin-bottom:10px !important;
+}
+.center_container textarea {
+    width:100%;
+    min-height:200px;
+    margin-bottom:10px;
+}

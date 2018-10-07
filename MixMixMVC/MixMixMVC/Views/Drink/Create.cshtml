@@ -1,0 +1,76 @@
+﻿@model MixMixMVC.Models.CreateDrinkViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>CreateDrinkViewModel</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.DrinkName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DrinkName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DrinkName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="Ingredient row">
+        <div class="form-horizontal">
+
+            @Html.LabelFor(model => model.Ingredient, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div id="ingredient" class="col-md-2">
+                <div class="form-group">
+                    @Html.EditorFor(model => model.Ingredient, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Ingredient, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            @Html.LabelFor(model => model.Measurement, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div id="measurement" class="col-md-1">
+                <div class="form-group">
+                    @Html.EditorFor(model => model.Measurement, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Measurement, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div id="quantity" class="col-md-1">
+                <div class="form-group">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Decription, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Decription, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Decription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
